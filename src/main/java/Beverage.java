@@ -1,5 +1,5 @@
-package com.brewbite.model.menu;
 
+package com.brewbite.model.menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -97,7 +97,8 @@ public class Beverage extends MenuItem {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Beverage other)) return false;
+        if (!(o instanceof Beverage)) return false;
+        Beverage other = (Beverage) o;
         return super.equals(o) &&
                Objects.equals(beverageType, other.beverageType);
     }
