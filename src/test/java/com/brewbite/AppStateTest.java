@@ -275,7 +275,6 @@ class AppStateTest {
     }
 
     // ── Helper ───────────────────────────────────────────────────────────────
-
     private Order makeOrder(String customerName) {
         Order order = new Order(customerName);
         Beverage latte = MenuItemFactory.createLatte();

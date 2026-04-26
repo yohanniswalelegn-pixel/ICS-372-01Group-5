@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.brewbite.ui.barista.BaristaController">
+      fx:controller="com.brewbite.ui.BaristaController">
     <ListView fx:id="orderListView" prefHeight="300.0" />
 
     <HBox spacing="10">

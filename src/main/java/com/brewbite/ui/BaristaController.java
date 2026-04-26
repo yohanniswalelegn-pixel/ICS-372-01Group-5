@@ -37,7 +37,20 @@ public class BaristaController implements BrewObserver {
                 if (empty || order == null) {
                     setText(null);
                 } else {
-                    setText(order.getDisplayHeader());
+                    StringBuilder text = new StringBuilder();
+
+                    text.append(order.getDisplayHeader()).append("\n");
+
+                    for (var item : order.getItems()) {
+                        text.append(" - ")
+                            .append(item.getDisplaySummary())
+                            .append("\n");
+                    }
+
+                    text.append("Total: $")
+                        .append(String.format("%.2f", order.getTotal()));
+
+                    setText(text.toString());
                 }
             }
         });
@@ -102,4 +115,13 @@ public class BaristaController implements BrewObserver {
             refreshOrders();
         }
     }
+
+
+
+
+    
+
+
+
 }
+
