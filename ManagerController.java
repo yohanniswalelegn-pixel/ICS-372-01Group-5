@@ -173,6 +173,40 @@ public class ManagerController implements BrewObserver {
     }
 
     @FXML
+    private void handleSaveIngredientRequirement() {
+        MenuItem selectedItem = menuTable.getSelectionModel().getSelectedItem();
+        String ingredientName = ingredientComboBox.getSelectionModel().getSelectedItem();
+        
+        if (selectedItem == null || ingredientName == null) {
+            updateStatus("Error: Select both a menu item and an ingredient.");
+            return;
+        }
+
+        try {
+            double amount = Double.parseDouble(requirementAmountField.getText());
+            
+            // Find if the requirement already exists to update it, otherwise add new
+            List<IngredientRequirement> requirements = selectedItem.getIngredientRequirements();
+            IngredientRequirement existing = requirements.stream()
+                .filter(r -> r.getIngredientName().equals(ingredientName))
+                .findFirst().orElse(null);
+
+            if (existing != null) {
+                existing.setAmountRequired(amount);
+            } else {
+                selectedItem.addIngredientRequirement(new IngredientRequirement(ingredientName, amount));
+            }
+
+            // Push update to the Catalog to trigger Observer notifications
+            menuCatalog.updateItem(selectedItem);
+            updateStatus("Ingredient cost updated for " + selectedItem.getName());
+            
+        } catch (NumberFormatException e) {
+            updateStatus("Error: Invalid amount entered.");
+        }
+    }
+
+    @FXML
     private void handleEditMenuItem() {
         MenuItem selected = menuTable.getSelectionModel().getSelectedItem();
         

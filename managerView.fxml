@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.brewbite.controller.ManagerController" spacing="0">
+    <!-- Main TabPane -->
+    <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        
+        <!-- Tab 1: Inventory -->
+        <Tab text="Inventory" closable="false">
+            <VBox spacing="10.0" padding="10.0">
+                <TableView fx:id="inventoryTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn text="Ingredient" fx:id="ingNameCol" prefWidth="250.0" />
+                        <TableColumn text="Quantity" fx:id="ingQtyCol" prefWidth="250.0" />
+                        <TableColumn text="Unit" fx:id="ingUnitCol" prefWidth="250.0" />
+                    </columns>
+                </TableView>
+                <HBox spacing="10.0" padding="10.0">
+                    <TextField fx:id="restockAmountField" promptText="Amount" prefWidth="200.0" />
+                    <Button text="Restock" onAction="#handleRestock" />
+                </HBox>
+            </VBox>
+        </Tab>
+
+        <!-- Tab 2: Menu Management -->
+        <Tab text="Menu Management" closable="false">
+            <VBox spacing="10.0" padding="10.0">
+                <TableView fx:id="menuTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn text="Item" fx:id="itemNameCol" prefWidth="200.0" />
+                        <TableColumn text="Base Price" fx:id="itemPriceCol" prefWidth="150.0" />
+                        <TableColumn text="Category" fx:id="itemCategoryCol" prefWidth="150.0" />
+                        <TableColumn text="Available" fx:id="itemAvailableCol" prefWidth="100.0" />
+                    </columns>
+                </TableView>
+                <VBox spacing="10.0" padding="10.0">
+                    <TextField fx:id="newItemNameField" promptText="New Item Name" />
+                    <TextField fx:id="basePriceField" promptText="Price" />
+                    <CheckBox fx:id="availableCheckBox" text="Available" />
+                    <HBox spacing="10.0">
+                        <Button text="Add" onAction="#handleAddMenuItem" />
+                        <Button text="Update Selected" onAction="#handleEditMenuItem" />
+                        <Button text="Remove" onAction="#handleRemoveMenuItem" />
+                        <Button text="Toggle Availability" onAction="#handleToggleAvailability" />
+                    </HBox>
+                </VBox>
+            </VBox>
+        </Tab>
+
+        <!-- Tab 3: Sales History -->
+        <Tab text="Sales History" closable="false">
+            <VBox spacing="10.0" padding="10.0">
+                <TableView fx:id="salesHistoryTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn text="Order ID" fx:id="orderIdCol" prefWidth="250.0" />
+                        <TableColumn text="Customer" fx:id="customerCol" prefWidth="250.0" />
+                        <TableColumn text="Total ($)" fx:id="totalCol" prefWidth="250.0" />
+                    </columns>
+                </TableView>
+            </VBox>
+        </Tab>
+    </TabPane>
+
+    <!-- Global Footer -->
+    <VBox spacing="0" padding="0">
+        <Separator />
+        <HBox spacing="10.0" padding="10.0" alignment="CENTER_RIGHT">
+            <Label fx:id="statusMessageLabel" text="Ready" />
+            <Button text="Logout" onAction="#handleLogout" />
+        </HBox>
+    </VBox>
+</VBox>
