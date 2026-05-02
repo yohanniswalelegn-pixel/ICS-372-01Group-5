@@ -168,15 +168,19 @@ class AppStateTest {
 
     @Test
     void inventoryDeductsOnConsume() {
-        InventoryManager inv = new InventoryManager();
-        inv.addIngredient(new Ingredient("Coffee Beans", 100, "g"));
+    InventoryManager inv = new InventoryManager();
 
-        Beverage latte = MenuItemFactory.createLatte();
-        OrderItem item = new OrderItem(latte, 1, "Medium");
-        assertTrue(inv.canFulfill(item, latte));
+    inv.addIngredient(new Ingredient("Coffee Beans", 100, "g"));
+    inv.addIngredient(new Ingredient("Milk", 200, "ml")); 
 
-        inv.consumeIngredients(item, latte);
-        assertEquals(82.0, inv.getIngredient("Coffee Beans").getQuantity(), 0.001);
+    Beverage latte = MenuItemFactory.createLatte();
+    OrderItem item = new OrderItem(latte, 1, "Medium");
+
+    assertTrue(inv.canFulfill(item, latte));
+
+    inv.consumeIngredients(item, latte);
+
+    assertEquals(82.0, inv.getIngredient("Coffee Beans").getQuantity(), 0.001);
     }
 
     @Test
