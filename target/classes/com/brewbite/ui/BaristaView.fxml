@@ -9,17 +9,17 @@
 <VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.brewbite.ui.BaristaController">
 
-    <!-- 🔹 LOGIN SECTION (ADD THIS HERE) -->
+    
     <HBox spacing="10">
         <Button fx:id="loginButton" text="Login" onAction="#onLoginClicked" />
         <Button fx:id="logoutButton" text="Logout" onAction="#onLogoutClicked" />
         <Label fx:id="loginStatusLabel" text="Logged out" />
     </HBox>
 
-    <!-- 🔹 ORDER LIST -->
+    
     <ListView fx:id="orderListView" prefHeight="300.0" />
 
-    <!-- 🔹 ACTION BUTTONS -->
+    
     <HBox spacing="10">
         <Button fx:id="advanceButton" text="Advance Status" onAction="#onAdvanceClicked" />
         <Button fx:id="completeButton" text="Complete Order" onAction="#onCompleteClicked" />
