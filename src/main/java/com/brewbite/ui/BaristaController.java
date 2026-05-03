@@ -98,48 +98,44 @@ public class BaristaController implements BrewObserver {
 
     @FXML
     private void onLoginClicked() {
-    final String correctUsername = "barista";
-    final String correctPassword = "coffee123";
+        final String correctPassword = "brew123";
 
-    while (!loggedIn) {
-        TextInputDialog usernameDialog = new TextInputDialog();
-        usernameDialog.setTitle("Barista Login");
-        usernameDialog.setHeaderText("Enter username");
-        usernameDialog.setContentText("Username:");
+         while (!loggedIn) {
+            TextInputDialog usernameDialog = new TextInputDialog();
+            usernameDialog.setTitle("Barista Login");
+            usernameDialog.setHeaderText("Enter username");
+            usernameDialog.setContentText("Username:");
 
-        Optional<String> usernameResult = usernameDialog.showAndWait();
+            Optional<String> usernameResult = usernameDialog.showAndWait();
+            if (usernameResult.isEmpty()) return;
 
-        if (usernameResult.isEmpty()) {
-            return;
+            TextInputDialog passwordDialog = new TextInputDialog();
+            passwordDialog.setTitle("Barista Login");
+            passwordDialog.setHeaderText("Enter password");
+            passwordDialog.setContentText("Password:");
+
+            Optional<String> passwordResult = passwordDialog.showAndWait();
+            if (passwordResult.isEmpty()) return;
+
+            String username = usernameResult.get();
+            String password = passwordResult.get();
+
+        
+            if ((username.equals("barista1") || username.equals("barista2")) 
+                    && password.equals(correctPassword)) {
+
+                loggedIn = true;
+                updateLoginState();
+
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Failed");
+                alert.setHeaderText("Incorrect username or password");
+                alert.setContentText("Please try again.");
+                alert.showAndWait();
+                }
         }
-
-        TextInputDialog passwordDialog = new TextInputDialog();
-        passwordDialog.setTitle("Barista Login");
-        passwordDialog.setHeaderText("Enter password");
-        passwordDialog.setContentText("Password:");
-
-        Optional<String> passwordResult = passwordDialog.showAndWait();
-
-        if (passwordResult.isEmpty()) {
-            return;
-        }
-
-        String username = usernameResult.get();
-        String password = passwordResult.get();
-
-        if (username.equals(correctUsername) && password.equals(correctPassword)) {
-            loggedIn = true;
-            updateLoginState();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Login Failed");
-            alert.setHeaderText("Incorrect username or password");
-            alert.setContentText("Please try again.");
-            alert.showAndWait();
-            }
-         }
     }
-
     @FXML
     private void onLogoutClicked() {
         loggedIn = false;
